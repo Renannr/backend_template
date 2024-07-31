@@ -1,8 +1,12 @@
 {
-    "cSpell.words": [
-        "codigo",
-        "endereco",
-        "Endereco",
-        "expressjwt"
-    ]
+  "[javascript]": {
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "prettier.useTabs": true,
+    "editor.tabSize": 2
+  },
+  "editor.formatOnSave": true,
+  "cSpell.words": ["codigo", "endereco", "Endereco", "expressjwt"]
 }

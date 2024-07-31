@@ -1,16 +1,16 @@
-import express from 'express';
 import bodyParser from 'body-parser';
-import { expressjwt as jwt } from 'express-jwt';
 import cors from 'cors';
-import process from 'node:process';
 import dotenv from 'dotenv';
+import express from 'express';
+import { expressjwt as jwt } from 'express-jwt';
+import process from 'node:process';
 dotenv.config();
 
 import db from './models/index.js';
 import routes from './routes/index.js';
 
+import { login, validateToken } from './authenticate.js';
 import { invalidToken } from './middlewares/auth.js';
-import { validateToken, login } from './authenticate.js';
 
 import createInitialUser from './controllers/createInitialUser.js';
 
@@ -20,9 +20,11 @@ app.use(express.json());
 app.use(cors());
 
 const jwtSecret = process.env.JWT_SECRET;
+const publicRoutes = ['/', '/hello', '/bye'];
+
 app.use(
   jwt({ secret: jwtSecret, algorithms: ['HS256'] }).unless({
-    path: ['/', '/login', '/check-token', '/create-initial-user'],
+    path: [...publicRoutes, '/login', '/check-token', '/create-initial-user'],
   })
 );
 

@@ -3,34 +3,21 @@ const private_routes = Router();
 
 import { verifyToken } from '../middlewares/auth.js';
 
-import {
-  listPessoa,
-  indexPessoa,
-  storePessoa,
-  updatePessoa,
-  removePessoa,
-  removeCredencial,
-} from '../controllers/pessoa/index.js';
-import {
-  listProduto,
-  listProdutoByTipo,
-  storeProduto,
-  updateProduto,
-  removeProduto,
-} from '../controllers/produto/index.js';
+import Pessoa from '../controllers/pessoa/index.js';
+import Produto from '../controllers/produto/index.js';
 
 private_routes
-  .get('/pessoa', verifyToken, listPessoa)
-  .get('/pessoa/:id', verifyToken, indexPessoa)
-  .post('/pessoa', verifyToken, storePessoa)
-  .put('/pessoa', verifyToken, updatePessoa)
-  .delete('/pessoa', verifyToken, removePessoa)
-  .delete('/pessoa', verifyToken, removeCredencial)
+  .get('/pessoa', verifyToken, Pessoa.list)
+  .get('/pessoa/:id', verifyToken, Pessoa.index)
+  .post('/pessoa', verifyToken, Pessoa.store)
+  .put('/pessoa', verifyToken, Pessoa.update)
+  .delete('/pessoa', verifyToken, Pessoa.delete)
+  .delete('/pessoa', verifyToken, Pessoa.deleteCredencial)
 
-  .get('/produto', verifyToken, listProduto)
-  .get('/produto/tipo', verifyToken, listProdutoByTipo)
-  .post('/produto', verifyToken, storeProduto)
-  .put('/produto', verifyToken, updateProduto)
-  .delete('/produto', verifyToken, removeProduto);
+  .get('/produto', verifyToken, Produto.list)
+  .get('/produto/tipo', verifyToken, Produto.listByTipo)
+  .post('/produto', verifyToken, Produto.store)
+  .put('/produto', verifyToken, Produto.update)
+  .delete('/produto', verifyToken, Produto.delete);
 
 export default private_routes;
